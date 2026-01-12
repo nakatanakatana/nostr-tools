@@ -7,7 +7,7 @@
 - [x] Task: Conductor - User Manual Verification 'Setup and Configuration' (Protocol in workflow.md) 9464737
 
 ## Phase 2: Core Logic and Data Handling
-- [ ] Task: Define an interface for NIP-05 data storage/retrieval.
+- [x] Task: Define an interface for NIP-05 data storage/retrieval. 52cf142
 - [ ] Task: Implement an in-memory data adapter that initializes from the parsed configuration map.
 - [ ] Task: Write unit tests to verify the map parsing and lookup logic.
 - [ ] Task: Conductor - User Manual Verification 'Core Logic and Data Handling' (Protocol in workflow.md)
