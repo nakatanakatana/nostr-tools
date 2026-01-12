@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"errors"
+	"os"
 	"testing"
 )
 
@@ -52,5 +53,43 @@ func TestMemoryProvider(t *testing.T) {
 	_, err = provider.GetPubKey(context.Background(), "alice")
 	if err == nil {
 		t.Error("Expected error for missing name, got nil")
+	}
+}
+
+func TestConfigToMemoryProvider(t *testing.T) {
+	if err := os.Setenv("NIP05_DOMAIN", "example.com"); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Setenv("NIP05_MAPPING", "user1:pub1,user2:pub2"); err != nil {
+		t.Fatal(err)
+	}
+	defer os.Clearenv()
+
+	cfg, err := LoadConfig()
+	if err != nil {
+		t.Fatalf("LoadConfig failed: %v", err)
+	}
+
+	provider := NewMemoryProvider(cfg.Mapping)
+
+	tests := []struct {
+		name    string
+		want    string
+		wantErr bool
+	}{
+		{"user1", "pub1", false},
+		{"user2", "pub2", false},
+		{"unknown", "", true},
+	}
+
+	for _, tt := range tests {
+		got, err := provider.GetPubKey(context.Background(), tt.name)
+		if (err != nil) != tt.wantErr {
+			t.Errorf("GetPubKey(%s) error = %v, wantErr %v", tt.name, err, tt.wantErr)
+			continue
+		}
+		if got != tt.want {
+			t.Errorf("GetPubKey(%s) got = %s, want %s", tt.name, got, tt.want)
+		}
 	}
 }
