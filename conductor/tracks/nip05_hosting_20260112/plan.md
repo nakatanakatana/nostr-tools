@@ -13,7 +13,7 @@
 - [x] Task: Conductor - User Manual Verification 'Core Logic and Data Handling' (Protocol in workflow.md) ada3b9a
 
 ## Phase 3: HTTP Server Implementation
-- [ ] Task: Implement the HTTP handler for `/.well-known/nostr.json` according to NIP-05 spec.
+- [x] Task: Implement the HTTP handler for `/.well-known/nostr.json` according to NIP-05 spec. c8340fa
 - [ ] Task: Add CORS middleware handling.
 - [ ] Task: Write integration tests for the HTTP handler (checking correct JSON response and status codes).
 - [ ] Task: Wire up the HTTP server in `main.go` with the configuration and data adapter.
