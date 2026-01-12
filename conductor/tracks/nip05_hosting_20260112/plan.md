@@ -9,7 +9,7 @@
 ## Phase 2: Core Logic and Data Handling
 - [x] Task: Define an interface for NIP-05 data storage/retrieval. 52cf142
 - [x] Task: Implement an in-memory data adapter that initializes from the parsed configuration map. 9faf8bc
-- [ ] Task: Write unit tests to verify the map parsing and lookup logic.
+- [x] Task: Write unit tests to verify the map parsing and lookup logic. f4a3dac
 - [ ] Task: Conductor - User Manual Verification 'Core Logic and Data Handling' (Protocol in workflow.md)
 
 ## Phase 3: HTTP Server Implementation
