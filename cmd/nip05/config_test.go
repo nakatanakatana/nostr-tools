@@ -7,18 +7,28 @@ import (
 
 func TestLoadConfig(t *testing.T) {
 	// Set environment variables
-	os.Setenv("NIP05_PORT", "9090")
-	os.Setenv("NIP05_HOST", "127.0.0.1")
-	os.Setenv("NIP05_DOMAIN", "example.com")
-	os.Setenv("NIP05_MAPPING", "bob:pubkey1,alice:pubkey2")
-	os.Setenv("LOG_LEVEL", "debug")
+	if err := os.Setenv("NIP05_PORT", "9090"); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Setenv("NIP05_HOST", "127.0.0.1"); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Setenv("NIP05_DOMAIN", "example.com"); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Setenv("NIP05_MAPPING", "bob:pubkey1,alice:pubkey2"); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Setenv("LOG_LEVEL", "debug"); err != nil {
+		t.Fatal(err)
+	}
 	// Clean up after test
 	defer func() {
-		os.Unsetenv("NIP05_PORT")
-		os.Unsetenv("NIP05_HOST")
-		os.Unsetenv("NIP05_DOMAIN")
-		os.Unsetenv("NIP05_MAPPING")
-		os.Unsetenv("LOG_LEVEL")
+		_ = os.Unsetenv("NIP05_PORT")
+		_ = os.Unsetenv("NIP05_HOST")
+		_ = os.Unsetenv("NIP05_DOMAIN")
+		_ = os.Unsetenv("NIP05_MAPPING")
+		_ = os.Unsetenv("LOG_LEVEL")
 	}()
 
 	cfg, err := LoadConfig()
@@ -54,10 +64,12 @@ func TestLoadConfig(t *testing.T) {
 func TestLoadConfigDefaults(t *testing.T) {
 	// Ensure cleanup
 	os.Clearenv()
-	
-	// We might need to set MAPPING to empty if it's not required, 
-	// but let's see if defaults work.
-	
+	// Set required domain
+	if err := os.Setenv("NIP05_DOMAIN", "example.com"); err != nil {
+		t.Fatal(err)
+	}
+	defer func() { _ = os.Unsetenv("NIP05_DOMAIN") }()
+
 	cfg, err := LoadConfig()
 	if err != nil {
 		t.Fatalf("LoadConfig failed: %v", err)
@@ -68,5 +80,19 @@ func TestLoadConfigDefaults(t *testing.T) {
 	}
 	if cfg.Host != "0.0.0.0" {
 		t.Errorf("Expected default Host 0.0.0.0, got %s", cfg.Host)
+	}
+}
+
+func TestLoadConfig_MissingRequired(t *testing.T) {
+	os.Clearenv()
+	// Domain is missing
+	if err := os.Setenv("NIP05_PORT", "8080"); err != nil {
+		t.Fatal(err)
+	}
+	defer func() { _ = os.Unsetenv("NIP05_PORT") }()
+
+	_, err := LoadConfig()
+	if err == nil {
+		t.Fatal("Expected error due to missing required field, got nil")
 	}
 }

@@ -28,6 +28,12 @@ func TestSetupLogger(t *testing.T) {
 		t.Error("Expected info level to be enabled for invalid input")
 	}
 
+	// Test with explicit "info"
+	logger = SetupLogger("info")
+	if !logger.Enabled(context.Background(), slog.LevelInfo) {
+		t.Error("Expected info level to be enabled")
+	}
+
 	// Test with explicit "error"
 	logger = SetupLogger("error")
 	if logger.Enabled(context.Background(), slog.LevelInfo) {
@@ -35,5 +41,20 @@ func TestSetupLogger(t *testing.T) {
 	}
 	if !logger.Enabled(context.Background(), slog.LevelError) {
 		t.Error("Expected error level to be enabled")
+	}
+
+	// Test with explicit "warn"
+	logger = SetupLogger("warn")
+	if logger.Enabled(context.Background(), slog.LevelInfo) {
+		t.Error("Expected info level to be disabled for warn level")
+	}
+	if !logger.Enabled(context.Background(), slog.LevelWarn) {
+		t.Error("Expected warn level to be enabled")
+	}
+
+	// Test with explicit "warning"
+	logger = SetupLogger("warning")
+	if !logger.Enabled(context.Background(), slog.LevelWarn) {
+		t.Error("Expected warn level to be enabled for 'warning' input")
 	}
 }
