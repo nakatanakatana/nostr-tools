@@ -1,10 +1,10 @@
 # Track Plan: Implement NIP-05 Hosting Server
 
-## Phase 1: Setup and Configuration
+## Phase 1: Setup and Configuration [checkpoint: 9464737]
 - [x] Task: Initialize `cmd/nip05` directory and basic `main.go` structure. 6a2bdbe
 - [x] Task: Define configuration struct with `env` tags, including the `NIP05_MAPPING` map support. 68cca62
 - [x] Task: Configure `slog` based on the environment variable. fc7f50a
-- [ ] Task: Conductor - User Manual Verification 'Setup and Configuration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Setup and Configuration' (Protocol in workflow.md) 9464737
 
 ## Phase 2: Core Logic and Data Handling
 - [ ] Task: Define an interface for NIP-05 data storage/retrieval.
