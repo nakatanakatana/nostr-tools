@@ -6,11 +6,11 @@
 - [x] Task: Configure `slog` based on the environment variable. fc7f50a
 - [x] Task: Conductor - User Manual Verification 'Setup and Configuration' (Protocol in workflow.md) 9464737
 
-## Phase 2: Core Logic and Data Handling
+## Phase 2: Core Logic and Data Handling [checkpoint: ada3b9a]
 - [x] Task: Define an interface for NIP-05 data storage/retrieval. 52cf142
 - [x] Task: Implement an in-memory data adapter that initializes from the parsed configuration map. 9faf8bc
 - [x] Task: Write unit tests to verify the map parsing and lookup logic. f4a3dac
-- [ ] Task: Conductor - User Manual Verification 'Core Logic and Data Handling' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Core Logic and Data Handling' (Protocol in workflow.md) ada3b9a
 
 ## Phase 3: HTTP Server Implementation
 - [ ] Task: Implement the HTTP handler for `/.well-known/nostr.json` according to NIP-05 spec.
