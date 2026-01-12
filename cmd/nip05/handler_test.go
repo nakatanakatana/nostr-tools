@@ -101,3 +101,23 @@ func TestNIP05Handler(t *testing.T) {
 		})
 	}
 }
+
+func TestNIP05Handler_CORS(t *testing.T) {
+	mapping := map[string]string{}
+	provider := NewMemoryProvider(mapping)
+	handler := NewNIP05Handler(provider)
+	
+	req, err := http.NewRequest("GET", "/.well-known/nostr.json?name=bob", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	rr := httptest.NewRecorder()
+
+	// Apply Middleware
+	corsHandler := CORSMiddleware(handler)
+	corsHandler.ServeHTTP(rr, req)
+
+	if val := rr.Header().Get("Access-Control-Allow-Origin"); val != "*" {
+		t.Errorf("Expected Access-Control-Allow-Origin: *, got %s", val)
+	}
+}
