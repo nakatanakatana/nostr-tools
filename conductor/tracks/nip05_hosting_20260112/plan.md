@@ -16,7 +16,7 @@
 - [x] Task: Implement the HTTP handler for `/.well-known/nostr.json` according to NIP-05 spec. c8340fa
 - [x] Task: Add CORS middleware handling. 7fcc7d6
 - [x] Task: Write integration tests for the HTTP handler (checking correct JSON response and status codes). 69083c2
-- [ ] Task: Wire up the HTTP server in `main.go` with the configuration and data adapter.
+- [x] Task: Wire up the HTTP server in `main.go` with the configuration and data adapter. f762585
 - [ ] Task: Conductor - User Manual Verification 'HTTP Server Implementation' (Protocol in workflow.md)
 
 ## Phase 4: Final Polish and Documentation
