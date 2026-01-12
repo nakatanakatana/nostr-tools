@@ -1,7 +1,7 @@
 # Track Plan: Implement NIP-05 Hosting Server
 
 ## Phase 1: Setup and Configuration
-- [ ] Task: Initialize `cmd/nip05` directory and basic `main.go` structure.
+- [x] Task: Initialize `cmd/nip05` directory and basic `main.go` structure. 6a2bdbe
 - [ ] Task: Define configuration struct with `env` tags, including the `NIP05_MAPPING` map support.
 - [ ] Task: Configure `slog` based on the environment variable.
 - [ ] Task: Conductor - User Manual Verification 'Setup and Configuration' (Protocol in workflow.md)
