@@ -19,7 +19,7 @@
 - [x] Task: Wire up the HTTP server in `main.go` with the configuration and data adapter. f762585
 - [x] Task: Conductor - User Manual Verification 'HTTP Server Implementation' (Protocol in workflow.md) ca08ca5
 
-## Phase 4: Final Polish and Documentation
+## Phase 4: Final Polish and Documentation [checkpoint: c814304]
 - [x] Task: Add graceful shutdown handling for the server. f32bfff
 - [x] Task: Update project README with instructions on how to run and configure the NIP-05 server using env vars. 6656802
-- [ ] Task: Conductor - User Manual Verification 'Final Polish and Documentation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Final Polish and Documentation' (Protocol in workflow.md) c814304
