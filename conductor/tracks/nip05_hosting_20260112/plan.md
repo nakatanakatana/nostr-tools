@@ -14,7 +14,7 @@
 
 ## Phase 3: HTTP Server Implementation
 - [x] Task: Implement the HTTP handler for `/.well-known/nostr.json` according to NIP-05 spec. c8340fa
-- [ ] Task: Add CORS middleware handling.
+- [x] Task: Add CORS middleware handling. 7fcc7d6
 - [ ] Task: Write integration tests for the HTTP handler (checking correct JSON response and status codes).
 - [ ] Task: Wire up the HTTP server in `main.go` with the configuration and data adapter.
 - [ ] Task: Conductor - User Manual Verification 'HTTP Server Implementation' (Protocol in workflow.md)
