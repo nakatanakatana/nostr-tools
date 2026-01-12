@@ -35,7 +35,7 @@ func Run() error {
 
 	// 4. Initialize Handler
 	handler := NewNIP05Handler(provider)
-	router := CORSMiddleware(handler)
+	router := AccessLogMiddleware(CORSMiddleware(handler))
 
 	// 5. Setup Server Mux
 	mux := http.NewServeMux()

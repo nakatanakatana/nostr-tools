@@ -11,7 +11,9 @@ import (
 func TestFullIntegration(t *testing.T) {
 	// 1. Setup Environment
 	os.Clearenv()
-	os.Setenv("NIP05_MAPPING", "integration:hexpubkey")
+	if err := os.Setenv("NIP05_MAPPING", "integration:hexpubkey"); err != nil {
+		t.Fatalf("Failed to set env: %v", err)
+	}
 	defer os.Clearenv()
 
 	// 2. Load Config
