@@ -20,6 +20,6 @@
 - [x] Task: Conductor - User Manual Verification 'HTTP Server Implementation' (Protocol in workflow.md) ca08ca5
 
 ## Phase 4: Final Polish and Documentation
-- [ ] Task: Add graceful shutdown handling for the server.
+- [x] Task: Add graceful shutdown handling for the server. f32bfff
 - [ ] Task: Update project README with instructions on how to run and configure the NIP-05 server using env vars.
 - [ ] Task: Conductor - User Manual Verification 'Final Polish and Documentation' (Protocol in workflow.md)
