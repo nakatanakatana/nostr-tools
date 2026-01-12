@@ -34,6 +34,11 @@ func (h *NIP05Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if err == nil {
 		// Found
 		response["names"].(map[string]string)[name] = pubkey
+		
+		relays, err := h.provider.GetRelays(r.Context(), pubkey)
+		if err == nil && len(relays) > 0 {
+			response["relays"].(map[string][]string)[pubkey] = relays
+		}
 	}
 
 	// Wait, I put expectedStatus: http.StatusNotFound in the test for "Unknown Name".

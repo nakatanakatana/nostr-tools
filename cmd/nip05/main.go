@@ -31,7 +31,7 @@ func Run() error {
 	logger.Info("Starting NIP-05 Server", "port", cfg.Port)
 
 	// 3. Initialize Data Provider
-	provider := NewMemoryProvider(cfg.Mapping)
+	provider := NewMemoryProvider(cfg.Mapping, cfg.Relays)
 
 	// 4. Initialize Handler
 	handler := NewNIP05Handler(provider)

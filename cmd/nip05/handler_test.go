@@ -12,7 +12,10 @@ func TestNIP05Handler(t *testing.T) {
 		"bob":   "pubkey1",
 		"alice": "pubkey2",
 	}
-	provider := NewMemoryProvider(mapping)
+	relays := map[string]string{
+		"pubkey1": "wss://relay.example.com",
+	}
+	provider := NewMemoryProvider(mapping, relays)
 	handler := NewNIP05Handler(provider)
 
 	tests := []struct {
@@ -22,17 +25,20 @@ func TestNIP05Handler(t *testing.T) {
 		expectedBody   map[string]interface{}
 	}{
 		{
-			name:           "Valid Name Bob",
+			name:           "Valid Name Bob with Relays",
 			queryName:      "bob",
 			expectedStatus: http.StatusOK,
 			expectedBody: map[string]interface{}{
 				"names": map[string]interface{}{
 					"bob": "pubkey1",
 				},
+				"relays": map[string]interface{}{
+					"pubkey1": []interface{}{"wss://relay.example.com"},
+				},
 			},
 		},
 		{
-			name:           "Valid Name Alice",
+			name:           "Valid Name Alice No Relays",
 			queryName:      "alice",
 			expectedStatus: http.StatusOK,
 			expectedBody: map[string]interface{}{
@@ -97,6 +103,34 @@ func TestNIP05Handler(t *testing.T) {
 						t.Errorf("Expected mapping %s -> %s, got %s", k, v, gotNames[k])
 					}
 				}
+
+				// Verify Relays if expected
+				if expectedRelaysMap, ok := tt.expectedBody["relays"].(map[string]interface{}); ok {
+					gotRelaysMap, ok := gotBody["relays"].(map[string]interface{})
+					if !ok {
+						if len(expectedRelaysMap) > 0 {
+							t.Error("Response body missing 'relays' object")
+						}
+					} else {
+						for k, v := range expectedRelaysMap {
+							expectedRelays := v.([]interface{})
+							gotRelays, ok := gotRelaysMap[k].([]interface{})
+							if !ok {
+								t.Errorf("Relays for %s not found or invalid format", k)
+								continue
+							}
+							if len(gotRelays) != len(expectedRelays) {
+								t.Errorf("Relays length mismatch for %s: got %d, want %d", k, len(gotRelays), len(expectedRelays))
+							}
+							// Simple element check (assuming order)
+							for i := range expectedRelays {
+								if gotRelays[i] != expectedRelays[i] {
+									t.Errorf("Relay mismatch for %s at index %d: got %v, want %v", k, i, gotRelays[i], expectedRelays[i])
+								}
+							}
+						}
+					}
+				}
 			}
 		})
 	}
@@ -104,7 +138,7 @@ func TestNIP05Handler(t *testing.T) {
 
 func TestNIP05Handler_CORS(t *testing.T) {
 	mapping := map[string]string{}
-	provider := NewMemoryProvider(mapping)
+	provider := NewMemoryProvider(mapping, nil)
 	handler := NewNIP05Handler(provider)
 	
 	req, err := http.NewRequest("GET", "/.well-known/nostr.json?name=bob", nil)

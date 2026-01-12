@@ -14,6 +14,9 @@ func TestFullIntegration(t *testing.T) {
 	if err := os.Setenv("NIP05_MAPPING", "integration:hexpubkey"); err != nil {
 		t.Fatalf("Failed to set env: %v", err)
 	}
+	if err := os.Setenv("NIP05_RELAYS", "hexpubkey:wss://relay.test"); err != nil {
+		t.Fatalf("Failed to set relays env: %v", err)
+	}
 	defer os.Clearenv()
 
 	// 2. Load Config
@@ -23,7 +26,7 @@ func TestFullIntegration(t *testing.T) {
 	}
 
 	// 3. Initialize Components
-	provider := NewMemoryProvider(cfg.Mapping)
+	provider := NewMemoryProvider(cfg.Mapping, cfg.Relays)
 	handler := NewNIP05Handler(provider)
 	router := CORSMiddleware(handler)
 
@@ -59,5 +62,15 @@ func TestFullIntegration(t *testing.T) {
 
 	if names["integration"] != "hexpubkey" {
 		t.Errorf("Expected integration->hexpubkey, got %v", names["integration"])
+	}
+
+	relays, ok := body["relays"].(map[string]interface{})
+	if !ok {
+		t.Fatal("Response missing 'relays' object")
+	}
+
+	relayList, ok := relays["hexpubkey"].([]interface{})
+	if !ok || len(relayList) != 1 || relayList[0] != "wss://relay.test" {
+		t.Errorf("Expected relay wss://relay.test, got %v", relays["hexpubkey"])
 	}
 }
