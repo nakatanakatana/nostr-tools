@@ -2,7 +2,7 @@
 
 ## Phase 1: Setup and Configuration
 - [x] Task: Initialize `cmd/nip05` directory and basic `main.go` structure. 6a2bdbe
-- [ ] Task: Define configuration struct with `env` tags, including the `NIP05_MAPPING` map support.
+- [x] Task: Define configuration struct with `env` tags, including the `NIP05_MAPPING` map support. 68cca62
 - [ ] Task: Configure `slog` based on the environment variable.
 - [ ] Task: Conductor - User Manual Verification 'Setup and Configuration' (Protocol in workflow.md)
 
