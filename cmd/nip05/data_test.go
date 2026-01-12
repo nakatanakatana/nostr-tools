@@ -57,9 +57,6 @@ func TestMemoryProvider(t *testing.T) {
 }
 
 func TestConfigToMemoryProvider(t *testing.T) {
-	if err := os.Setenv("NIP05_DOMAIN", "example.com"); err != nil {
-		t.Fatal(err)
-	}
 	if err := os.Setenv("NIP05_MAPPING", "user1:pub1,user2:pub2"); err != nil {
 		t.Fatal(err)
 	}

@@ -24,7 +24,7 @@ func Run() error {
 	// 2. Setup Logger
 	logger := SetupLogger(cfg.LogLevel)
 	slog.SetDefault(logger)
-	logger.Info("Starting NIP-05 Server", "port", cfg.Port, "domain", cfg.Domain)
+	logger.Info("Starting NIP-05 Server", "port", cfg.Port)
 
 	// 3. Initialize Data Provider
 	provider := NewMemoryProvider(cfg.Mapping)

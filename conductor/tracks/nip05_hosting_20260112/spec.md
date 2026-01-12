@@ -6,7 +6,7 @@ Implement a standalone NIP-05 hosting server in `cmd/nip05`. This server will ha
 ## Goals
 - Create a new command entry point at `cmd/nip05`.
 - Implement an HTTP server that responds to `/.well-known/nostr.json`.
-- Support configuration via environment variables (port, domain, data source).
+- Support configuration via environment variables (port, data source).
 - Ensure secure defaults and appropriate logging using `slog`.
 - Provide a simple way to manage the mapping of names to public keys directly via environment variables.
 
@@ -36,7 +36,6 @@ Implement a standalone NIP-05 hosting server in `cmd/nip05`. This server will ha
 ### 3. Configuration
 - **NIP05_PORT**: Port to listen on (default: "8080").
 - **NIP05_HOST**: Host interface to bind to (default: "0.0.0.0").
-- **NIP05_DOMAIN**: The domain name this server is authoritative for (validation check).
 - **NIP05_MAPPING**: A comma-separated list of `name:pubkey` pairs to define the NIP-05 mappings (e.g., `bob:hexpubkey1,alice:hexpubkey2`).
 - **LOG_LEVEL**: Logging level (debug, info, warn, error).
 

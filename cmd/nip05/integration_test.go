@@ -11,7 +11,6 @@ import (
 func TestFullIntegration(t *testing.T) {
 	// 1. Setup Environment
 	os.Clearenv()
-	os.Setenv("NIP05_DOMAIN", "example.com")
 	os.Setenv("NIP05_MAPPING", "integration:hexpubkey")
 	defer os.Clearenv()
 

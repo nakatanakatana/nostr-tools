@@ -7,7 +7,6 @@ import (
 type Config struct {
 	Port     string            `env:"NIP05_PORT" envDefault:"8080"`
 	Host     string            `env:"NIP05_HOST" envDefault:"0.0.0.0"`
-	Domain   string            `env:"NIP05_DOMAIN,required"`
 	Mapping  map[string]string `env:"NIP05_MAPPING" envSeparator:"," envKeyValSeparator:":"`
 	LogLevel string            `env:"LOG_LEVEL" envDefault:"info"`
 }
