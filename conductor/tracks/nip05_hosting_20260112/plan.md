@@ -21,5 +21,5 @@
 
 ## Phase 4: Final Polish and Documentation
 - [x] Task: Add graceful shutdown handling for the server. f32bfff
-- [ ] Task: Update project README with instructions on how to run and configure the NIP-05 server using env vars.
+- [x] Task: Update project README with instructions on how to run and configure the NIP-05 server using env vars. 6656802
 - [ ] Task: Conductor - User Manual Verification 'Final Polish and Documentation' (Protocol in workflow.md)
