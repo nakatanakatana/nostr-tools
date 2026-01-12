@@ -8,7 +8,7 @@ Implement a standalone NIP-05 hosting server in `cmd/nip05`. This server will ha
 - Implement an HTTP server that responds to `/.well-known/nostr.json`.
 - Support configuration via environment variables (port, domain, data source).
 - Ensure secure defaults and appropriate logging using `slog`.
-- Provide a simple way to manage the mapping of names to public keys (initially static configuration or simple file-based).
+- Provide a simple way to manage the mapping of names to public keys directly via environment variables.
 
 ## Detailed Requirements
 
@@ -37,11 +37,13 @@ Implement a standalone NIP-05 hosting server in `cmd/nip05`. This server will ha
 - **NIP05_PORT**: Port to listen on (default: "8080").
 - **NIP05_HOST**: Host interface to bind to (default: "0.0.0.0").
 - **NIP05_DOMAIN**: The domain name this server is authoritative for (validation check).
+- **NIP05_MAPPING**: A comma-separated list of `name:pubkey` pairs to define the NIP-05 mappings (e.g., `bob:hexpubkey1,alice:hexpubkey2`).
 - **LOG_LEVEL**: Logging level (debug, info, warn, error).
 
 ### 4. Data Management
-- For this initial version, support a simple JSON file or environment variable map for defining the `name -> pubkey` mappings.
-- Design the interface to be extensible for future database backends.
+- The primary data source for `name -> pubkey` mappings will be the `NIP05_MAPPING` environment variable.
+- The application should parse this map at startup and store it in memory for fast lookups.
+- Design the interface to be extensible for future database backends, even though the initial implementation is env-var based.
 
 ### 5. Logging
 - Use `log/slog`.
@@ -50,5 +52,5 @@ Implement a standalone NIP-05 hosting server in `cmd/nip05`. This server will ha
 
 ## Non-Functional Requirements
 - **Security**: Validate the `name` parameter to prevent abuse.
-- **Performance**: Efficient lookup of names.
+- **Performance**: Efficient lookup of names (in-memory map).
 - **Maintainability**: Clean separation of HTTP handling and business logic.

@@ -2,14 +2,14 @@
 
 ## Phase 1: Setup and Configuration
 - [ ] Task: Initialize `cmd/nip05` directory and basic `main.go` structure.
-- [ ] Task: Define configuration struct and implement environment variable parsing using `github.com/caarlos0/env`.
+- [ ] Task: Define configuration struct with `env` tags, including the `NIP05_MAPPING` map support.
 - [ ] Task: Configure `slog` based on the environment variable.
 - [ ] Task: Conductor - User Manual Verification 'Setup and Configuration' (Protocol in workflow.md)
 
 ## Phase 2: Core Logic and Data Handling
 - [ ] Task: Define an interface for NIP-05 data storage/retrieval.
-- [ ] Task: Implement a simple in-memory or file-based adapter for the data interface (loading from a JSON file or env var).
-- [ ] Task: Write unit tests for the data adapter.
+- [ ] Task: Implement an in-memory data adapter that initializes from the parsed configuration map.
+- [ ] Task: Write unit tests to verify the map parsing and lookup logic.
 - [ ] Task: Conductor - User Manual Verification 'Core Logic and Data Handling' (Protocol in workflow.md)
 
 ## Phase 3: HTTP Server Implementation
@@ -21,5 +21,5 @@
 
 ## Phase 4: Final Polish and Documentation
 - [ ] Task: Add graceful shutdown handling for the server.
-- [ ] Task: Update project README with instructions on how to run and configure the NIP-05 server.
+- [ ] Task: Update project README with instructions on how to run and configure the NIP-05 server using env vars.
 - [ ] Task: Conductor - User Manual Verification 'Final Polish and Documentation' (Protocol in workflow.md)
