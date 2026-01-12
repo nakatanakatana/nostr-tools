@@ -12,12 +12,12 @@
 - [x] Task: Write unit tests to verify the map parsing and lookup logic. f4a3dac
 - [x] Task: Conductor - User Manual Verification 'Core Logic and Data Handling' (Protocol in workflow.md) ada3b9a
 
-## Phase 3: HTTP Server Implementation
+## Phase 3: HTTP Server Implementation [checkpoint: ca08ca5]
 - [x] Task: Implement the HTTP handler for `/.well-known/nostr.json` according to NIP-05 spec. c8340fa
 - [x] Task: Add CORS middleware handling. 7fcc7d6
 - [x] Task: Write integration tests for the HTTP handler (checking correct JSON response and status codes). 69083c2
 - [x] Task: Wire up the HTTP server in `main.go` with the configuration and data adapter. f762585
-- [ ] Task: Conductor - User Manual Verification 'HTTP Server Implementation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'HTTP Server Implementation' (Protocol in workflow.md) ca08ca5
 
 ## Phase 4: Final Polish and Documentation
 - [ ] Task: Add graceful shutdown handling for the server.
