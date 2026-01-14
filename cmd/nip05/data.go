@@ -11,12 +11,17 @@ type NIP05Provider interface {
 	GetRelays(ctx context.Context, pubkey string) ([]string, error)
 }
 
+type NIP05Response struct {
+	Names  map[string]string   `json:"names"`
+	Relays map[string][]string `json:"relays,omitempty"`
+}
+
 type MemoryProvider struct {
 	mapping map[string]string
 	relays  map[string][]string
 }
 
-func NewMemoryProvider(mapping map[string]string, relaysConfig map[string]string) *MemoryProvider {
+func ParseRelays(relaysConfig map[string]string) map[string][]string {
 	relays := make(map[string][]string)
 	for k, v := range relaysConfig {
 		// Split comma-separated relays
@@ -26,10 +31,13 @@ func NewMemoryProvider(mapping map[string]string, relaysConfig map[string]string
 		}
 		relays[k] = list
 	}
+	return relays
+}
 
+func NewMemoryProvider(mapping map[string]string, relaysConfig map[string]string) *MemoryProvider {
 	return &MemoryProvider{
 		mapping: mapping,
-		relays:  relays,
+		relays:  ParseRelays(relaysConfig),
 	}
 }
 
