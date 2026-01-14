@@ -23,7 +23,9 @@ func TestNIP05Handler(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer os.RemoveAll(tempDir)
+	defer func() {
+		_ = os.RemoveAll(tempDir)
+	}()
 
 	fullJSON := `{"names":{"alice":"pub1","bob":"pub2"}}`
 	aliceJSON := `{"names":{"alice":"pub1"}}`

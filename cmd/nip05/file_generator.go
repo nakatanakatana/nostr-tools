@@ -72,7 +72,9 @@ func (fg *FileGenerator) writeJSON(name string, resp NIP05Response) (string, err
 	if err != nil {
 		return "", fmt.Errorf("failed to create file %s: %w", fileName, err)
 	}
-	defer f.Close()
+	defer func() {
+		_ = f.Close()
+	}()
 
 	if err := json.NewEncoder(f).Encode(resp); err != nil {
 		return "", fmt.Errorf("failed to encode JSON to %s: %w", fileName, err)
@@ -87,6 +89,6 @@ func (fg *FileGenerator) GetFilePath(name string) string {
 
 func (fg *FileGenerator) Cleanup() {
 	if fg.tempDir != "" {
-		os.RemoveAll(fg.tempDir)
+		_ = os.RemoveAll(fg.tempDir)
 	}
 }
