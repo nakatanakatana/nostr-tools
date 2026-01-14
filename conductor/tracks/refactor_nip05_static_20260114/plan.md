@@ -1,9 +1,9 @@
 # Track Plan: Refactor NIP-05 to Pre-generated Static File Serving
 
-## Phase 1: Preparation & Config Parsing Logic
+## Phase 1: Preparation & Config Parsing Logic [checkpoint: 57366bf]
 - [ ] Task: Create new track directory and setup files.
 - [x] Task: Verify existing tests pass for `cmd/nip05`. [d6d141c]
-- [ ] Task: Refactor `config.go` (or create new utility) to expose parsed data structure for file generation. (Ensure current `main.go` logic is preserved during transition).
+- [x] Task: Refactor `config.go` (or create new utility) to expose parsed data structure for file generation. (Ensure current `main.go` logic is preserved during transition). [2ae4ba6]
 
 ## Phase 2: File Generation Logic
 - [ ] Task: TDD - Write tests for `FileGenerator` struct/function.
