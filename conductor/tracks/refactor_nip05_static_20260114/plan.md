@@ -5,15 +5,9 @@
 - [x] Task: Verify existing tests pass for `cmd/nip05`. [d6d141c]
 - [x] Task: Refactor `config.go` (or create new utility) to expose parsed data structure for file generation. (Ensure current `main.go` logic is preserved during transition). [2ae4ba6]
 
-## Phase 2: File Generation Logic
-- [ ] Task: TDD - Write tests for `FileGenerator` struct/function.
-    - Test generating full JSON.
-    - Test generating individual user JSONs.
-    - Test handling of file paths in TempDir.
-- [ ] Task: Implement `FileGenerator`.
-    - Logic to take the `nip05.Data` (or similar map) and write `nip05_full.json`.
-    - Logic to loop through users and write `nip05_user_<name>.json`.
-    - Return a map or lookup mechanism for "Name -> FilePath".
+## Phase 2: File Generation Logic [checkpoint: 8501cf5]
+- [x] Task: TDD - Write tests for `FileGenerator` struct/function. [80023b0]
+- [x] Task: Implement `FileGenerator`. [80023b0]
 
 ## Phase 3: Handler Refactoring
 - [ ] Task: TDD - Write tests for the new Handler logic using `http.ServeFile`.
