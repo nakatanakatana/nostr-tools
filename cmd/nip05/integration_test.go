@@ -26,7 +26,12 @@ func TestFullIntegration(t *testing.T) {
 	}
 
 	// 3. Initialize Components
-	provider := NewMemoryProvider(cfg.Mapping, cfg.Relays)
+	provider, err := NewFileGenerator(cfg.Mapping, cfg.Relays)
+	if err != nil {
+		t.Fatalf("Failed to create file generator: %v", err)
+	}
+	defer provider.Cleanup()
+
 	handler := NewNIP05Handler(provider)
 	router := CORSMiddleware(handler)
 

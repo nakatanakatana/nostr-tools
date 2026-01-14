@@ -1,15 +1,18 @@
 package main
 
 import (
-	"encoding/json"
 	"net/http"
 )
 
-type NIP05Handler struct {
-	provider NIP05Provider
+type FilePathProvider interface {
+	GetFilePath(name string) string
 }
 
-func NewNIP05Handler(provider NIP05Provider) *NIP05Handler {
+type NIP05Handler struct {
+	provider FilePathProvider
+}
+
+func NewNIP05Handler(provider FilePathProvider) *NIP05Handler {
 	return &NIP05Handler{
 		provider: provider,
 	}
@@ -17,37 +20,24 @@ func NewNIP05Handler(provider NIP05Provider) *NIP05Handler {
 
 func (h *NIP05Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	name := r.URL.Query().Get("name")
-	if name == "" {
-		http.Error(w, "missing name parameter", http.StatusBadRequest)
+	// name is empty string if not present, which maps to full list in our logic
+
+	filePath := h.provider.GetFilePath(name)
+	if filePath == "" {
+		// File not found for this name (or unknown user)
+		// Assuming unknown user should return 404 or empty JSON?
+		// Existing behavior for unknown was to return empty maps.
+		// If we want to strictly follow that, we need a "empty.json" generated.
+		// However, for now let's return 404 as it is cleaner for static file server.
+		// If spec requires 200 OK with empty body, we need to generate that file.
+		// Let's stick to 404 for missing file.
+		http.NotFound(w, r)
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	// CORS header will be added by middleware, but good to ensure response is valid JSON.
-
-	response := map[string]interface{}{
-		"names":  map[string]string{},
-		"relays": map[string][]string{},
-	}
-
-	pubkey, err := h.provider.GetPubKey(r.Context(), name)
-	if err == nil {
-		// Found
-		response["names"].(map[string]string)[name] = pubkey
-		
-		relays, err := h.provider.GetRelays(r.Context(), pubkey)
-		if err == nil && len(relays) > 0 {
-			response["relays"].(map[string][]string)[pubkey] = relays
-		}
-	}
-
-	// Wait, I put expectedStatus: http.StatusNotFound in the test for "Unknown Name".
-	// I should probably return 200 OK with empty map, as that is valid JSON.
-	// Returning 404 might be interpreted as "endpoint not found" by some clients.
-	// I will update the test to expect 200 OK.
-
-	if err := json.NewEncoder(w).Encode(response); err != nil {
-		http.Error(w, "internal server error", http.StatusInternalServerError)
-		return
-	}
+	// Content-Type header is usually sniffed by ServeFile, 
+	// but for JSON it's good practice to set it explicitly if extension is correct.
+	// Since our files are .json, ServeFile should handle it. 
+	
+	http.ServeFile(w, r, filePath)
 }

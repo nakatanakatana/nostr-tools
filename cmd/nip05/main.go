@@ -30,8 +30,13 @@ func Run() error {
 	slog.SetDefault(logger)
 	logger.Info("Starting NIP-05 Server", "port", cfg.Port)
 
-	// 3. Initialize Data Provider
-	provider := NewMemoryProvider(cfg.Mapping, cfg.Relays)
+	// 3. Initialize Data Provider (File Generator)
+	// We use the FileGenerator to pre-compute responses and store them in temp files.
+	provider, err := NewFileGenerator(cfg.Mapping, cfg.Relays)
+	if err != nil {
+		return fmt.Errorf("failed to initialize file generator: %w", err)
+	}
+	defer provider.Cleanup()
 
 	// 4. Initialize Handler
 	handler := NewNIP05Handler(provider)
