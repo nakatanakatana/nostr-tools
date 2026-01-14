@@ -15,7 +15,7 @@ jobs:
             v2-aqua-installer-${{runner.os}}-${{runner.arch}}-
       - uses: aquaproj/aqua-installer@v4.0.4
         with:
-          aqua_version: v2.56.2
+          aqua_version: v2.56.3
 
   version:
     needs: setup
@@ -30,7 +30,7 @@ jobs:
             v2-aqua-installer-${{runner.os}}-${{runner.arch}}-
       - uses: aquaproj/aqua-installer@v4.0.4
         with:
-          aqua_version: v2.56.2
+          aqua_version: v2.56.3
       - run: which go
       - run: go version
 
@@ -47,7 +47,7 @@ jobs:
             v2-aqua-installer-${{runner.os}}-${{runner.arch}}-
       - uses: aquaproj/aqua-installer@v4.0.4
         with:
-          aqua_version: v2.56.2
+          aqua_version: v2.56.3
       - run: golangci-lint run
 
   build:
@@ -63,7 +63,7 @@ jobs:
             v2-aqua-installer-${{runner.os}}-${{runner.arch}}-
       - uses: aquaproj/aqua-installer@v4.0.4
         with:
-          aqua_version: v2.56.2
+          aqua_version: v2.56.3
       - run: go build -o dist/ ./cmd/...
 
   test:
@@ -79,7 +79,7 @@ jobs:
             v2-aqua-installer-${{runner.os}}-${{runner.arch}}-
       - uses: aquaproj/aqua-installer@v4.0.4
         with:
-          aqua_version: v2.56.2
+          aqua_version: v2.56.3
       - run: go test ./... -v -coverprofile=coverage.txt -covermode=atomic
       - uses: codecov/codecov-action@v5
         with:
