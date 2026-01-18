@@ -1,5 +1,11 @@
 # nostr-tools
 
+![publish-docker-image](https://github.com/nakatanakatana/nostr-tools/actions/workflows/publish-docker-image.yaml/badge.svg)
+![CI](https://github.com/nakatanakatana/nostr-tools/actions/workflows/ci.yaml/badge.svg)
+![Coverage](https://github.com/nakatanakatana/octocov-central/blob/main/badges/nakatanakatana/nostr-tools/coverage.svg?raw=true)
+![Code to Test Ratio](https://github.com/nakatanakatana/octocov-central/blob/main/badges/nakatanakatana/nostr-tools/ratio.svg?raw=true)
+![Test Execution Time](https://github.com/nakatanakatana/octocov-central/blob/main/badges/nakatanakatana/nostr-tools/time.svg?raw=true)
+
 A suite of tools to easily and securely build and operate external services such as Nostr relays and NIP-05.
 
 ## Components
