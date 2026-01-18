@@ -1,6 +1,10 @@
 name: CI
 
-on: push
+on:
+  pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   setup:
@@ -80,10 +84,5 @@ jobs:
       - uses: aquaproj/aqua-installer@v4.0.4
         with:
           aqua_version: v2.56.4
-      - run: go test ./... -v -coverprofile=coverage.txt -covermode=atomic
-      - uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage.txt
-          flags: unittests
-          slug: nakatanakatana/nostr-tools
+      - run: go test ./... -v -coverprofile=coverage.out -covermode=atomic
+      - uses: k1LoW/octocov-action@v1
