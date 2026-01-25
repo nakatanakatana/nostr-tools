@@ -5,6 +5,7 @@
 ![Coverage](https://github.com/nakatanakatana/octocov-central/blob/main/badges/nakatanakatana/nostr-tools/coverage.svg?raw=true)
 ![Code to Test Ratio](https://github.com/nakatanakatana/octocov-central/blob/main/badges/nakatanakatana/nostr-tools/ratio.svg?raw=true)
 ![Test Execution Time](https://github.com/nakatanakatana/octocov-central/blob/main/badges/nakatanakatana/nostr-tools/time.svg?raw=true)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/nakatanakatana/nostr-tools)
 
 A suite of tools to easily and securely build and operate external services such as Nostr relays and NIP-05.
 
